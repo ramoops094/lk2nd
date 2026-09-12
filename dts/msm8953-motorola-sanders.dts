@@ -1,0 +1,22 @@
+/dts-v1/;
+
+/include/ "msm8953.dtsi"
+/include/ "motorola-carrier-channel-ids.dtsi"
+
+/ {
+	#address-cells = <2>;
+	#size-cells = <2>;
+	qcom,msm-id = <0x125 0x00>;
+	qcom,board-id = <0x4b 0x8100>,
+			<0x4b 0x8200>,
+			<0x4b 0x8300>,
+			<0x4b 0x83b0>,
+			<0x4b 0x8400>,
+			<0x4c 0x8400>;
+
+	model = "Motorola Moto G5s Plus (sanders)";
+	compatible = "motorola,sanders", "qcom,msm8953", "lk2nd,device";
+	lk2nd,pstore = <0xef000000 0x80000>;
+
+	lk2nd,motorola-unitinfo = <1>;
+};

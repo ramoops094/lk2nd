@@ -16,6 +16,7 @@ DTBS += \
 	$(LOCAL_DIR)/msm8953-lenovo-kuntao.dtb \
 	$(LOCAL_DIR)/msm8953-meizu-m1721.dtb \
 	$(LOCAL_DIR)/msm8953-motorola-potter.dtb \
+	$(LOCAL_DIR)/msm8953-motorola-sanders.dtb \
 	$(LOCAL_DIR)/msm8953-xiaomi-common.dtb \
 	$(LOCAL_DIR)/msm8953-xiaomi-daisy.dtb \
 	$(LOCAL_DIR)/msm8953-xiaomi-markw.dtb \
