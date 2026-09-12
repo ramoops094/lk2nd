@@ -19,4 +19,16 @@
 	lk2nd,pstore = <0xef000000 0x80000>;
 
 	lk2nd,motorola-unitinfo = <1>;
+
+	panel {
+		compatible = "motorola,sanders-panel";
+
+		qcom,mdss_dsi_mot_tianma_550_1080p_vid_v0 {
+			compatible = "motorola,sanders-tianma-nt35596";
+		};
+
+		qcom,mdss_dsi_mot_djn_550_1080p_vid_v0 {
+			compatible = "motorola,sanders-djn-ili7807d";
+		};
+	};
 };
