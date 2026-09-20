@@ -1,0 +1,39 @@
+// SPDX-License-Identifier: GPL-2.0-only
+
+/dts-v1/;
+
+/include/ "msm8953.dtsi"
+/include/ "motorola-carrier-channel-ids.dtsi"
+
+/ {
+	#address-cells = <2>;
+	#size-cells = <2>;
+	qcom,msm-id = <0x15d 0x00>;
+	qcom,board-id = <0x08 0x03>;
+	qcom,pmic-id = <0x10016 0x25 0x00 0x00>;
+
+	model = "Motorola Moto G7 Play (Channel)";
+	compatible = "motorola,channel", "qcom,sdm632", "lk2nd,device";
+
+	lk2nd,motorola-unitinfo = <1>;
+
+	panel {
+		compatible = "motorola,channel-panel";
+
+		qcom,mdss_dsi_mot_djn_569_hd_vid_v0 {
+			compatible = "motorola,channel-569-djn";
+		};
+
+		qcom,mdss_dsi_mot_djn_568_hd_vid_v0 {
+			compatible = "motorola,channel-568-djn";
+		};
+
+		qcom,mdss_dsi_mot_dsbj_569_hd_vid_v0 {
+			compatible = "motorola,channel-569-dsbj";
+		};
+
+		qcom,mdss_dsi_mot_dsbj_570_hd_vid_v0 {
+			compatible = "motorola,channel-570-dsbj";
+		};
+	};
+};
