@@ -16,7 +16,6 @@
 
 	model = "deen";
 	compatible = "motorola,deen", "qcom,msm8953", "lk2nd,device";
-	lk2nd,pstore = <0xef000000 0xc0000>;
 
 	lk2nd,motorola-unitinfo = <1>;
 
