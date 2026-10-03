@@ -1,18 +1,48 @@
-name: Build
-on: [push, pull_request]
+name: Build lk2nd (moto8953)
+
+on:
+  push:
+    branches: [moto8953]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  lk2nd-msm8953:
-    name: lk2nd
-    uses: ./.github/workflows/lk2nd.yml
-    with:
-      platform: msm8953-secondary
-      artifacts: |
-        build-*/lk2nd.img
-  lk2nd-motorola-ali:
-    name: lk2nd
-    uses: ./.github/workflows/lk2nd.yml
-    with:
-      platform: motorola-ali-secondary
-      artifacts: |
-        build-*/lk2nd.img
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: moto8953
+          fetch-depth: 1
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -yqq
+          sudo apt-get install -yqq gcc-arm-none-eabi device-tree-compiler libfdt-dev make python3
+
+      - name: Build lk2nd for msm8953
+        run: |
+          make -j"$(nproc)" TOOLCHAIN_PREFIX=arm-none-eabi- msm8953-secondary
+          IMG="$(find . -maxdepth 2 -name lk2nd.img -print -quit)"
+          test -n "$IMG"
+          echo "lk2nd image: $IMG ($(stat -c %s "$IMG") bytes)"
+          mkdir -p out
+          cp "$IMG" out/lk2nd-msm8953.img
+
+      - name: Check moto device entries
+        run: |
+          for dts in dts/msm8953-motorola-sanders.dts dts/sdm632-motorola-channel.dts dts/msm8953-motorola-deen.dts; do
+            test -s "$dts" || { echo "missing $dts" >&2; exit 1; }
+          done
+          echo "moto8953 device entries OK"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lk2nd-moto8953
+          path: out/lk2nd-msm8953.img
+          if-no-files-found: error
